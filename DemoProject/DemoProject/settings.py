@@ -9,12 +9,12 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
-from pathlib import Path
 import os
+from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,8 +25,9 @@ SECRET_KEY = ')qdnaw8kmd4g0au%xcg1%m0i&c-r+p0j_y3h#aacf!)t7y)45$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get('DEBUG'),1))
+# DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-13-234-118-48.ap-south-1.compute.amazonaws.com','http://127.0.0.1:8000/']
+ALLOWED_HOSTS = ['ec2-13-234-118-48.ap-south-1.compute.amazonaws.com','127.0.0.1']
 
 
 # Application definition
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'DemoProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
